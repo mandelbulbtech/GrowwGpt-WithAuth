@@ -239,7 +239,7 @@ const ChatInput: React.FC = () => {
       <form onSubmit={handleSubmit} className="relative">
         <div className="flex items-center relative border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-groww-blue focus-within:border-transparent">
           {/* Image Generation Toggle */}
-          {/* <button
+          <button
             type="button"
             onClick={() => { setIsImageGeneration(!isImageGeneration); setIsSearchMode(false); }}
             className={`absolute left-2 top-1/2 transform -translate-y-1/2 p-1 rounded-full focus:outline-none ${isImageGeneration
@@ -253,7 +253,7 @@ const ChatInput: React.FC = () => {
               <circle cx="9" cy="9" r="2" stroke="currentColor" strokeWidth="2" />
               <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="2" />
             </svg>
-          </button> */}
+          </button>
 
           {/* Search Toggle Button */}
           <button
@@ -265,7 +265,7 @@ const ChatInput: React.FC = () => {
               }
             }}
             disabled={!isBingSearchAvailable}
-            className={`flex flex-row gap-2 px-2 text-sm border border-gray-300 text-md absolute left-4 top-1/2 transform -translate-y-1/2 p-1 rounded-full ${isSearchMode
+            className={`flex flex-row gap-2 px-2 text-sm border border-gray-300 text-md absolute left-12 top-1/2 transform -translate-y-1/2 p-1 rounded-full ${isSearchMode
                 ? "text-blue-500 bg-blue-50 hover:border-blue-500"
                 : isBingSearchAvailable
                   ? "text-gray-500 hover:text-gray-600 hover:border-gray-600"
@@ -319,7 +319,7 @@ const ChatInput: React.FC = () => {
             onChange={handleTextareaChange}
             onKeyDown={handleKeyDown}
             placeholder={isImageGeneration ? "Describe the image you want to generate..." : "Ask about stocks, mutual funds, or investment strategies..."}
-            className="w-full py-3 pl-32 pr-12 resize-none rounded-lg overflow-hidden focus:outline-none"
+            className="w-full py-3 pl-40 pr-12 resize-none rounded-lg overflow-hidden focus:outline-none"
             rows={1}
             disabled={loadingMessage}
           />
