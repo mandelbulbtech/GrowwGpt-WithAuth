@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Soehne';
+  src: url('./assets/fonts/soehne/TestSohne-Buch-BF663d89cd32e6a.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  font-family: 'Soehne', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #44475b;
+  background-color: #f9f9f9;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Responsive table wrapper */
+.responsive-table {
+  overflow-x: auto; /* Enables horizontal scrolling */
+  margin: 10px 0; /* Adds some vertical spacing around the table */
+}
+
+/* Styles for the table within the responsive wrapper */
+.responsive-table table {
+  width: 100%; /* Full-width tables */
+  border-collapse: collapse; /* Collapses borders between cells */
+  border-spacing: 0; /* Removes space between cells */
+}
+
+.responsive-table th,
+.responsive-table td {
+  border: 1px solid #ccc; /* Light grey border for readability */
+  padding: 8px; /* Ample padding to make data easily readable */
+  text-align: left; /* Aligns text to the left */
+}
+
+.responsive-table th {
+  background-color: #f2f2f2; /* Light grey background for headers */
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b5b5b5;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #44475b;
+}
+
+.extra-spacing p,
+.extra-spacing ul,
+.extra-spacing ol,
+.extra-spacing h1,
+.extra-spacing h2,
+.extra-spacing h3,
+.extra-spacing h4,
+.extra-spacing h5,
+.extra-spacing h6 {
+  margin-bottom: 1em !important;
+}
+
+.extra-spacing li{
+  margin-bottom: 0.5em !important;
+  margin-left: 1.5em !important;
+}
+
+.extra-spacing p{
+  margin-bottom: 0.5em !important;
+}
+
+.prose p, .prose ul, .prose ol, .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6, .prose hr {
+  margin-bottom: 1.05em !important;
+} 
+
+.prose p{
+  margin-bottom: 0.8em !important;
+}

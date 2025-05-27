@@ -1,0 +1,41 @@
+name: Build and Push Backend Images to ACR
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Backend/**'  # Trigger only when there's a change in the Backend folder
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Azure CLI
+        run: |
+          sudo apt-get update && sudo apt-get install -y azure-cli
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login to Azure Container Registry (ACR) via Azure CLI
+        run: |
+          az acr login --name ${{ vars.ACR_NAME }}
+
+      - name: Build and Push Docker images to ACR
+        run: |
+          cd Backend
+          docker build -t ${{ vars.ACR_NAME }}.azurecr.io/backend:latest -t ${{ vars.ACR_NAME }}.azurecr.io/backend:${{ github.run_number }} .
+          docker push ${{ vars.ACR_NAME }}.azurecr.io/backend:latest
+          docker push ${{ vars.ACR_NAME }}.azurecr.io/backend:${{ github.run_number }}
+
+      - name: Restart Backend App Service
+        run: |
+          az webapp restart --name ${{ vars.BACKEND_APP_NAME }} --resource-group ${{ vars.RG_NAME }}

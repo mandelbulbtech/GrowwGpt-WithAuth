@@ -1,0 +1,54 @@
+name: Build and Deploy Frontend Code to App Service
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Frontend/**'  # Trigger only when there's a change in the Frontend folder
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.10.0'
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: Frontend
+
+      - name: Build React App
+        run: CI=false npm run build
+        working-directory: Frontend
+
+      - name: Zip Build Folder
+        run: |
+          cd Frontend/build  # Change to the Frontend/build directory
+          zip -r ../../build.zip .  # Zip the contents of the build folder and store it in the root
+        working-directory: ./ 
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Set startup command
+        run: |
+          az webapp config set \
+            --name ${{ vars.FRONTEND_APP_NAME }} \
+            --resource-group ${{ vars.RG_NAME }} \
+            --startup-file "pm2 serve /home/site/wwwroot --no-daemon --spa"
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ vars.FRONTEND_APP_NAME }}
+          package: build.zip
