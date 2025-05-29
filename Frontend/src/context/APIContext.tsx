@@ -226,8 +226,8 @@ export const APIProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const getModels = async () => {
     return [
       { id: 'gpt-4o', name: 'gpt-4o' },
-      // { id: 'gpt-4o-mini', name: 'gpt-4o-mini' },
-      // { id: 'o3-mini', name: 'o3-mini' }
+      { id: 'gpt-4o-mini', name: 'gpt-4o-mini' },
+      { id: 'o3-mini', name: 'o3-mini' }
     ];
   };
 
