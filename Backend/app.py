@@ -1283,6 +1283,10 @@ def generate_share_id(chat_id):
     share_id = hashlib.sha256(hash_input.encode()).hexdigest()[:32]
     return share_id
 
+@app.route('/login')
+def login():
+    return jsonify({'status':200, 'message':"Sucess" })
+ 
 @app.route('/api/chats/<chat_id>/share', methods=['POST'])
 def share_chat(chat_id):
     """Create a shareable link for a chat."""
